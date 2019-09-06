@@ -1,0 +1,9 @@
+Visual Basic language
+Read Data()
+For Point(x,y)
+{
+  坐标转换：经纬度->屏幕坐标
+  0-1024   ->  -180-180
+  lineto(x,y)
+}
+x'=a(放大缩小)x+b(平移)
