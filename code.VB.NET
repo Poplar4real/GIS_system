@@ -22,9 +22,9 @@ Public Class Form1
 
     Private Sub Button1_Paint(sender As Object, e As PaintEventArgs) Handles Button1.Paint
         If drawline Then
-            Dim map As Graphics = PictureBox1.CreateGraphics() '画布
+            Dim map As Graphics = Me.CreateGraphics() '画布
             Dim pen1 As Pen = New Pen(Color.Blue, 1) '画笔
-            FileOpen(1, "coastline.dat", OpenMode.Input)
+            FileOpen(1, "test.txt", OpenMode.Input)
             Input(1, longtitude)
             Do While Not EOF(1)
                 Input(1, latitude)
