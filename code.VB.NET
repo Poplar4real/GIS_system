@@ -1,23 +1,24 @@
-'###################################################################################################################
+'##########################3############################################################################################################
 'Project: GIS_system
 'Description: This system can paint the map of the world on the windows_form. It can show the latitude and longtitude
 'of the place of the map.
 'Author: Benjamin
 'Date: version_1.0:Sept.21st
-'###################################################################################################################
-
+'#######################################################################################################################################
 
 Imports System.IO
 Public Class Form1
     Dim st As String 'st用来读取每行信息
-    Dim x(1000), y(1000) As Single
-    Dim i, count As Integer '计数器
+    Dim x(300), y(300) As Single
+    Dim i As Integer '计数器
     Dim st_split() As String '分离后的字符
     Dim symbol As String '分隔符
+
     Public Structure Info
         Dim longtitude As String '经度
         Dim latitude As String '纬度
     End Structure
+
     Private Sub Form1_Paint(sender As Object, e As PaintEventArgs) Handles Me.Paint
         Dim g As Graphics = Me.CreateGraphics  '声明画布
         Dim my_pen As Pen = New Pen(Color.Blue, 0.5) '声明画笔
@@ -34,14 +35,21 @@ Public Class Form1
                 pet.latitude = st_split(1)
                 x(i) = (Val(pet.longtitude) + 180) * Me.Width / 360
                 y(i) = (90 - Val(pet.latitude)) * Me.Height / 180
+                If i > 0 Then
+                    g.DrawLine(my_pen, x(i), y(i), x(i - 1), y(i - 1))
+                End If
                 i = i + 1
                 st = reader.ReadLine
             Loop
-            count = i - 1
-            For i = 0 To count
-                g.DrawLine(my_pen, x(i), y(i), x(i + 1), y(i + 1))
-            Next
         Loop
         reader.Close()
     End Sub
+
+    Private Sub Form1_MouseWheel(sender As Object, e As MouseEventArgs) Handles Me.MouseWheel
+    End Sub
+
+    Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles Me.Resize
+
+    End Sub
 End Class
+
